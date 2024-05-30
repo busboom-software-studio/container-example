@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  devcontainer:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached      
+    network_mode: service:db
+    command: sleep infinity
+
+  hello-world:
+    image: crccheck/hello-world
+    ports:
+      - "8000:8000"
+
+  jupyter:
+    image: jupyter/base-notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/home/jovyan/work
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
