@@ -4,10 +4,10 @@ services:
   devcontainer:
     build: 
       context: .
-      dockerfile: Dockerfile
+      dockerfile: .devcontainer/Dockerfile
     volumes:
       - ../..:/workspaces:cached      
-    network_mode: service:db
+    network_mode: service:redis
     command: sleep infinity
 
   hello-world:
